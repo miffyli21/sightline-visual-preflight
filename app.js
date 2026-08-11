@@ -47,7 +47,337 @@
     exportReportButton: $("#exportReportButton"),
     aboutButton: $("#aboutButton"),
     aboutDialog: $("#aboutDialog"),
-    closeAboutButton: $("#closeAboutButton")
+    closeAboutButton: $("#closeAboutButton"),
+    languageButton: $("#languageButton"),
+    languageButtonText: $("#languageButtonText"),
+    pageDescription: $("#pageDescription")
+  };
+
+  var VERSION = "v0.1.0-alpha.2";
+
+  var translations = {
+    zh: {
+      meta: {
+        title: "Sightline · 视觉成品预检",
+        description: "Sightline：在发布前检查海报、社媒图和 UI 截图是否看得清。"
+      },
+      language: {
+        chinese: "中文",
+        english: "英文"
+      },
+      topbar: {
+        localOnly: "图片不会离开你的设备",
+        loadDemo: "载入示例",
+        importImage: "导入成品图"
+      },
+      intro: {
+        kicker: "发布前的最后一眼",
+        headBefore: "别只看它“好不好看”，也看看它",
+        headHighlight: "能不能被看清。",
+        copy: "面向海报、社媒图和 UI 截图的本地视觉预检。这里给的是风险提示，不是无障碍合规认证。"
+      },
+      input: {
+        heading: "成品与场景",
+        dropTitle: "拖入 PNG / JPG / WebP / SVG",
+        dropCopy: "或点这里导入已经导出的视觉成品",
+        previewScene: "预览场景"
+      },
+      target: {
+        phone: "手机信息流",
+        desktop: "桌面网页",
+        poster: "远看海报",
+        phoneOption: "手机信息流 · 390px 宽",
+        desktopOption: "桌面网页 · 1280px 宽",
+        posterOption: "远看海报 · 缩略预览"
+      },
+      keyMessage: {
+        heading: "标出必须看清的内容",
+        copy: "例如标题、价格、报名方式、错误提示。拖拽框选后，它会被带进本地验收记录。",
+        clear: "清空"
+      },
+      exact: {
+        heading: "取两点，测一次真实对比",
+        copy: "依次点击文字色与背景色。对带渐变、阴影或照片底图的文字尤其有用。",
+        sampleA: "取文字色",
+        sampleB: "取背景色",
+        reset: "重置取色"
+      },
+      mode: {
+        original: "原图",
+        small: "小屏",
+        gray: "灰阶",
+        protanopia: "红弱模拟",
+        deuteranopia: "绿弱模拟",
+        tritanopia: "蓝弱模拟"
+      },
+      aria: {
+        switchLanguage: "切换到{language}",
+        modeTabs: "视觉模拟模式",
+        canvas: "成品图预览",
+        close: "关闭"
+      },
+      legend: {
+        keyArea: "关键区域",
+        sampleA: "文字色",
+        sampleB: "背景色"
+      },
+      report: {
+        heading: "预检记录",
+        keyAreas: "关键区域",
+        sampledPairs: "已测色对",
+        potentialRisks: "潜在混淆色"
+      },
+      contrast: {
+        heading: "当前 A / B 对比度",
+        waiting: "等待取色",
+        unchecked: "未检查",
+        waitingDetail: "取样后会按照 WCAG 的文字对比度阈值给出提示。",
+        passBadge: "正文 AA 参考",
+        passDetail: "{first} / {second}。常规文字可把 4.5:1 当作参考线。",
+        warnBadge: "仅大字参考",
+        warnDetail: "{first} / {second}。达到 3:1，但常规正文通常还不够。",
+        failBadge: "建议调整",
+        failDetail: "{first} / {second}。低于 3:1，建议先拉开明暗差。"
+      },
+      findings: {
+        heading: "可能需要看一眼",
+        refresh: "刷新",
+        noAreas: "还没有标出关键区域。先圈标题、价格、CTA 或错误提示，检查才有重点。",
+        areasRecorded: "已记录 {count} 个关键区域。切换视图时请优先看它们。",
+        noSamples: "还没有测实际 A / B 色对。图片里的文字常常需要手动取样确认。",
+        contrastPass: "当前 A / B 色对达到 4.5:1 参考线，可作为常规正文的良好起点。",
+        contrastWarn: "当前 A / B 色对低于 4.5:1。若是常规正文，建议再提高明暗差。",
+        contrastFail: "当前 A / B 色对低于 3:1。小字、浅字或移动场景下尤其容易消失。",
+        colorRisk: "主色 {first} 与 {second} 在{mode}中可能接近；不要只用颜色区分状态。",
+        noColorRisk: "主要颜色在三种色觉模拟中没有出现明显的近似色对。仍建议人工查看关键区域。"
+      },
+      palette: {
+        heading: "画面主色",
+        count: "{count} 色"
+      },
+      readiness: {
+        emptyEyebrow: "还没有足够信息",
+        emptyTitle: "先标出重要信息",
+        emptyCopy: "这不是打分器；关键内容和实际色对都值得人工确认。",
+        areasEyebrow: "已建立审查重点",
+        areasTitle: "重点已圈出，再取一组色",
+        areasCopy: "切换小屏、灰阶和色觉模拟，看看这 {count} 处信息是否还成立。",
+        passEyebrow: "完成一项精确核对",
+        passTitle: "继续做情境检查",
+        passCopy: "A / B 已达到正文参考线；接下来检查小屏和灰阶下的信息层级。",
+        riskEyebrow: "发现可调整点",
+        riskTitle: "关键信息可能偏弱",
+        riskCopy: "先加大文字与背景的明暗差，再重新取样核对。"
+      },
+      stage: {
+        invalidFile: "请选择 PNG、JPG、WebP、GIF 或 SVG 图片。",
+        imported: "已导入。先框选标题、价格或按钮，再切换不同视图检查。",
+        unreadable: "这张图片暂时无法读取，请换一张 PNG、JPG、WebP 或 SVG。",
+        marked: "已标注 1 个关键区域。你可以继续取 A / B 色，或切换不同视图检查。",
+        areaTooSmall: "框选区域太小了。请把标题、按钮或价格完整框起来。",
+        marking: "框选模式：拖拽圈出标题、按钮、价格或任何必须看清的内容。",
+        small: "小屏模拟：现在以 320px 宽度重绘。看重点信息会不会被压小。",
+        simulation: "{mode}仅用于风险预览。观察关键信息是否仍可区分。",
+        original: "正在查看原图。点击画面可取样 {sample}。",
+        sampleA: "A 文字色",
+        sampleB: "B 背景色",
+        demoLoaded: "已载入演示图。里面刻意放了几种常见的可读性风险。",
+        areasCleared: "已清空关键区域。",
+        analysisRefreshed: "已重新分析画面主色与潜在混淆色。",
+        imageExported: "已导出当前视图 PNG。",
+        reportExported: "已下载本地预检记录 JSON。"
+      },
+      marking: {
+        finish: "完成框选",
+        start: "框选关键区域",
+        active: "框选模式已开启：在图片上拖拽，标出一块必须看清的内容。",
+        idle: "准备就绪：点击“框选关键区域”后，在画面上拖拽。"
+      },
+      image: {
+        demoTitle: "示例 · 信息流推广图",
+        untitled: "未命名成品图"
+      },
+      overlay: {
+        keyArea: "关键 {count}"
+      },
+      export: {
+        image: "导出当前视图 PNG",
+        report: "下载本地预检记录"
+      },
+      footer: {
+        copy: "Sightline v0.1.0-alpha.2 · 本地浏览器工具。模拟结果用于设计审查，不替代真实用户测试、屏幕阅读器测试或正式合规审计。",
+        howTo: "怎么使用？"
+      },
+      about: {
+        heading: "三分钟，给一张成品图多看几眼。",
+        step1: "导入已经导出的海报、社媒图或 UI 截图。",
+        step2: "切换小屏、灰阶与不同色觉模拟，观察关键信息是否还成立。",
+        step3: "框选标题、价格、按钮等重点，再用 A / B 取色测实际对比度。",
+        step4: "把本地预检记录附在设计验收或交付里。",
+        note: "所有处理均在当前浏览器完成，不会上传图片。"
+      }
+    },
+    en: {
+      meta: {
+        title: "Sightline · Local visual preflight",
+        description: "Check whether the key information in a poster, social graphic, or UI screenshot is still legible before it ships."
+      },
+      language: {
+        chinese: "Chinese",
+        english: "English"
+      },
+      topbar: {
+        localOnly: "Your image stays on this device",
+        loadDemo: "Load demo",
+        importImage: "Import image"
+      },
+      intro: {
+        kicker: "One last look before publishing",
+        headBefore: "A visual should not only look good. It should also ",
+        headHighlight: "stay legible.",
+        copy: "A local visual preflight for posters, social graphics, and UI screenshots. It highlights risks; it is not an accessibility conformance certification."
+      },
+      input: {
+        heading: "Image & scenario",
+        dropTitle: "Drop a PNG / JPG / WebP / SVG",
+        dropCopy: "or select an exported visual to inspect",
+        previewScene: "Preview scenario"
+      },
+      target: {
+        phone: "Mobile feed",
+        desktop: "Desktop web",
+        poster: "Distant poster",
+        phoneOption: "Mobile feed · 390px wide",
+        desktopOption: "Desktop web · 1280px wide",
+        posterOption: "Distant poster · thumbnail view"
+      },
+      keyMessage: {
+        heading: "Mark what must stay legible",
+        copy: "For example: a title, price, sign-up method, or error message. Drag a box to include it in the local review record.",
+        clear: "Clear"
+      },
+      exact: {
+        heading: "Sample two pixels, check the real contrast",
+        copy: "Click the text color, then the background color. Especially useful for gradients, shadows, or text on photos.",
+        sampleA: "text color",
+        sampleB: "background color",
+        reset: "Reset samples"
+      },
+      mode: {
+        original: "Original",
+        small: "Small screen",
+        gray: "Grayscale",
+        protanopia: "Red-weak simulation",
+        deuteranopia: "Green-weak simulation",
+        tritanopia: "Blue-weak simulation"
+      },
+      aria: {
+        switchLanguage: "Switch to {language}",
+        modeTabs: "Visual simulation modes",
+        canvas: "Visual preview",
+        close: "Close"
+      },
+      legend: {
+        keyArea: "Key area",
+        sampleA: "text color",
+        sampleB: "background color"
+      },
+      report: {
+        heading: "Preflight record",
+        keyAreas: "Key areas",
+        sampledPairs: "Sampled pairs",
+        potentialRisks: "Possible color conflicts"
+      },
+      contrast: {
+        heading: "Current A / B contrast",
+        waiting: "Awaiting samples",
+        unchecked: "Unchecked",
+        waitingDetail: "After sampling, you will see guidance based on WCAG text-contrast reference thresholds.",
+        passBadge: "Normal-text AA reference",
+        passDetail: "{first} / {second}. 4.5:1 is a useful reference for normal text.",
+        warnBadge: "Large-text reference only",
+        warnDetail: "{first} / {second}. It reaches 3:1, but is usually not enough for normal text.",
+        failBadge: "Adjust recommended",
+        failDetail: "{first} / {second}. It is below 3:1; increase the lightness difference first."
+      },
+      findings: {
+        heading: "Worth another look",
+        refresh: "Refresh",
+        noAreas: "No key areas are marked yet. Start with a title, price, CTA, or error message so the review has a focus.",
+        areasRecorded: "{count} key areas recorded. Prioritize them as you switch views.",
+        noSamples: "No A / B color pair has been sampled yet. Text in images often needs a manual check.",
+        contrastPass: "The current A / B pair reaches the 4.5:1 reference point — a good start for normal text.",
+        contrastWarn: "The current A / B pair is below 4.5:1. For normal text, increase the lightness difference.",
+        contrastFail: "The current A / B pair is below 3:1. Small, light, or mobile text can disappear especially easily.",
+        colorRisk: "Dominant colors {first} and {second} may converge in {mode}; do not rely on color alone to communicate a state.",
+        noColorRisk: "No obvious near-color pairs appeared in the three color-vision simulations. Still inspect key areas manually."
+      },
+      palette: {
+        heading: "Dominant colors",
+        count: "{count} colors"
+      },
+      readiness: {
+        emptyEyebrow: "Not enough review input yet",
+        emptyTitle: "Mark the important information first",
+        emptyCopy: "This is not a score. Key content and real sampled color pairs still need a human check.",
+        areasEyebrow: "Review focus established",
+        areasTitle: "Key content is marked — sample a color pair next",
+        areasCopy: "Switch between small screen, grayscale, and color-vision views. Does each of these {count} areas still work?",
+        passEyebrow: "One precise check complete",
+        passTitle: "Keep testing the situation",
+        passCopy: "A / B meets the normal-text reference. Next, check hierarchy on small screens and in grayscale.",
+        riskEyebrow: "An adjustment may help",
+        riskTitle: "Key information may be too weak",
+        riskCopy: "Increase the lightness difference between text and background, then sample again."
+      },
+      stage: {
+        invalidFile: "Choose a PNG, JPG, WebP, GIF, or SVG image.",
+        imported: "Image imported. Mark a title, price, or button first, then inspect the different views.",
+        unreadable: "This image cannot be read right now. Try a PNG, JPG, WebP, or SVG instead.",
+        marked: "1 key area marked. You can keep sampling A / B colors or switch views to inspect it.",
+        areaTooSmall: "That marked area is too small. Box the complete title, button, or price.",
+        marking: "Marking mode: drag over a title, button, price, or anything that must stay legible.",
+        small: "Small-screen simulation: redrawn at 320px wide. Check whether key information becomes too small.",
+        simulation: "{mode} is a risk preview only. Inspect whether key information is still distinguishable.",
+        original: "Viewing the original. Click the image to sample {sample}.",
+        sampleA: "A text color",
+        sampleB: "B background color",
+        demoLoaded: "Demo loaded. It intentionally includes several common readability risks.",
+        areasCleared: "Key areas cleared.",
+        analysisRefreshed: "Dominant colors and possible color conflicts re-analysed.",
+        imageExported: "Current view exported as PNG.",
+        reportExported: "Local preflight record downloaded as JSON."
+      },
+      marking: {
+        finish: "Finish marking",
+        start: "Mark key area",
+        active: "Marking mode is on: drag across a piece of content that must stay legible.",
+        idle: "Ready: click “Mark key area”, then drag on the image."
+      },
+      image: {
+        demoTitle: "Demo · Feed promotion graphic",
+        untitled: "Untitled visual"
+      },
+      overlay: {
+        keyArea: "Key {count}"
+      },
+      export: {
+        image: "Export current view PNG",
+        report: "Download local record"
+      },
+      footer: {
+        copy: "Sightline v0.1.0-alpha.2 · A local browser tool. Simulations support design review; they do not replace real-user testing, screen-reader testing, or a formal conformance audit.",
+        howTo: "How does it work?"
+      },
+      about: {
+        heading: "Give an exported visual three more minutes of attention.",
+        step1: "Import an already exported poster, social graphic, or UI screenshot.",
+        step2: "Switch between small-screen, grayscale, and color-vision views to see whether key information still holds up.",
+        step3: "Mark the title, price, button, or other focus areas, then sample A / B pixels to check actual contrast.",
+        step4: "Attach the local preflight record to design review or delivery work.",
+        note: "Everything is processed in this browser. Your image is never uploaded."
+      }
+    }
   };
 
   var sourceCanvas = document.createElement("canvas");
@@ -56,9 +386,11 @@
   var overlayContext = dom.overlayCanvas.getContext("2d");
 
   var state = {
+    language: resolveLanguage(),
     mode: "original",
     target: "phone",
     title: "示例 · 信息流推广图",
+    isDemo: true,
     originalWidth: 1200,
     originalHeight: 800,
     keyAreas: [],
@@ -74,20 +406,108 @@
     potentialRisks: []
   };
 
-  var modeLabels = {
-    original: "原图",
-    small: "小屏模拟",
-    gray: "灰阶",
-    protanopia: "红弱模拟",
-    deuteranopia: "绿弱模拟",
-    tritanopia: "蓝弱模拟"
-  };
+  function getTranslationValue(collection, key) {
+    return key.split(".").reduce(function (value, part) {
+      return value && typeof value === "object" ? value[part] : undefined;
+    }, collection);
+  }
 
-  var targetLabels = {
-    phone: "手机信息流",
-    desktop: "桌面网页",
-    poster: "远看海报"
-  };
+  function t(key, values) {
+    var message = getTranslationValue(translations[state.language], key) ||
+      getTranslationValue(translations.zh, key) || key;
+    return String(message).replace(/\{(\w+)\}/g, function (token, name) {
+      return values && values[name] !== undefined ? values[name] : token;
+    });
+  }
+
+  function resolveLanguage() {
+    var requested = "";
+    try {
+      requested = new URLSearchParams(window.location.search).get("lang") || "";
+    } catch (error) {
+      requested = "";
+    }
+
+    if (requested === "en" || requested === "zh") {
+      return requested;
+    }
+
+    try {
+      var saved = window.localStorage.getItem("sightline-language");
+      if (saved === "en" || saved === "zh") {
+        return saved;
+      }
+    } catch (error) {
+      // Local storage can be unavailable in privacy-restricted browser modes.
+    }
+
+    return typeof navigator !== "undefined" && /^zh\b/i.test(navigator.language || "") ? "zh" : "en";
+  }
+
+  function applyStaticTranslations() {
+    if (document.documentElement) {
+      document.documentElement.lang = state.language === "en" ? "en" : "zh-CN";
+    }
+    document.title = t("meta.title");
+    if (dom.pageDescription) {
+      dom.pageDescription.content = t("meta.description");
+    }
+
+    $$('[data-i18n]').forEach(function (element) {
+      element.textContent = t(element.dataset.i18n);
+    });
+    $$('[data-i18n-aria-label]').forEach(function (element) {
+      element.setAttribute("aria-label", t(element.dataset.i18nAriaLabel));
+    });
+
+    if (dom.languageButton && dom.languageButtonText) {
+      var nextLanguage = state.language === "en" ? "zh" : "en";
+      var nextLanguageName = state.language === "en" ? t("language.chinese") : t("language.english");
+      dom.languageButtonText.textContent = nextLanguage === "en" ? "EN" : "中文";
+      dom.languageButton.setAttribute("aria-label", t("aria.switchLanguage", { language: nextLanguageName }));
+      dom.languageButton.title = t("aria.switchLanguage", { language: nextLanguageName });
+    }
+  }
+
+  function writeLanguageToUrl() {
+    try {
+      var url = new URL(window.location.href);
+      url.searchParams.set("lang", state.language);
+      window.history.replaceState({}, "", url.toString());
+    } catch (error) {
+      // A shareable language URL is a convenience; the app still works without it.
+    }
+  }
+
+  function setLanguage(language) {
+    if (language !== "zh" && language !== "en") {
+      return;
+    }
+
+    state.language = language;
+    try {
+      window.localStorage.setItem("sightline-language", language);
+    } catch (error) {
+      // The selected language still applies for the current session.
+    }
+    writeLanguageToUrl();
+    applyStaticTranslations();
+    updateMarkingUi();
+    updateSampleControls();
+    if (state.isDemo) {
+      loadDemo();
+    } else {
+      render();
+    }
+  }
+
+  function modeLabel(mode) {
+    return t("mode." + mode);
+  }
+
+  function targetLabel(target) {
+    return t("target." + target);
+  }
 
   function clamp(value, min, max) {
     return Math.min(Math.max(value, min), max);
@@ -217,7 +637,9 @@
   }
 
   function loadDemo() {
-    state.title = "示例 · 信息流推广图";
+    var isEnglish = state.language === "en";
+    state.isDemo = true;
+    state.title = t("image.demoTitle");
     state.originalWidth = 1200;
     state.originalHeight = 800;
     setSourceDimensions(1200, 800);
@@ -255,24 +677,28 @@
     context.fillText("WEEKEND RESET CLUB", 122, 149);
 
     context.fillStyle = "#1D3246";
-    context.font = "700 67px system-ui, sans-serif";
-    context.fillText("忙到满格前，", 119, 249);
-    context.fillText("把一小时留给自己。", 119, 329);
+    context.font = "700 " + (isEnglish ? "56" : "67") + "px system-ui, sans-serif";
+    context.fillText(isEnglish ? "Make an hour" : "忙到满格前，", 119, 249);
+    context.fillText(isEnglish ? "just for you." : "把一小时留给自己。", 119, 329);
 
     context.fillStyle = "#8D9AA2";
-    context.font = "400 24px system-ui, sans-serif";
-    context.fillText("一个不赶时间的周末练习：呼吸、拉伸、喝一杯热茶。", 121, 384);
+    context.font = "400 " + (isEnglish ? "20" : "24") + "px system-ui, sans-serif";
+    context.fillText(
+      isEnglish ? "A slow weekend session: breathe, stretch, and have tea." : "一个不赶时间的周末练习：呼吸、拉伸、喝一杯热茶。",
+      121,
+      384
+    );
 
     drawRoundRect(context, 120, 440, 278, 72, 18);
     context.fillStyle = "#1F866D";
     context.fill();
     context.fillStyle = "#BEE59A";
-    context.font = "700 24px system-ui, sans-serif";
-    context.fillText("今晚 20:00 直播", 156, 486);
+    context.font = "700 " + (isEnglish ? "21" : "24") + "px system-ui, sans-serif";
+    context.fillText(isEnglish ? "Tonight · 8 PM" : "今晚 20:00 直播", 156, 486);
 
     context.fillStyle = "#7775D9";
-    context.font = "500 19px system-ui, sans-serif";
-    context.fillText("带上耳机，给自己留一点空间", 122, 555);
+    context.font = "500 " + (isEnglish ? "17" : "19") + "px system-ui, sans-serif";
+    context.fillText(isEnglish ? "Headphones on. Make room for yourself." : "带上耳机，给自己留一点空间", 122, 555);
 
     drawRoundRect(context, 726, 119, 291, 514, 39);
     context.fillStyle = "#243346";
@@ -305,20 +731,20 @@
     context.stroke();
 
     context.fillStyle = "#17314A";
-    context.font = "700 25px system-ui, sans-serif";
-    context.fillText("你的今天，", 783, 420);
-    context.fillText("也值得被温柔对待", 773, 454);
+    context.font = "700 " + (isEnglish ? "22" : "25") + "px system-ui, sans-serif";
+    context.fillText(isEnglish ? "Today" : "你的今天，", 783, 420);
+    context.fillText(isEnglish ? "can be gentle too." : "也值得被温柔对待", 773, 454);
 
     drawRoundRect(context, 782, 496, 180, 48, 15);
     context.fillStyle = "#EEAB62";
     context.fill();
     context.fillStyle = "#624726";
-    context.font = "700 16px system-ui, sans-serif";
-    context.fillText("查看本周计划", 812, 526);
+    context.font = "700 " + (isEnglish ? "15" : "16") + "px system-ui, sans-serif";
+    context.fillText(isEnglish ? "See the plan" : "查看本周计划", 812, 526);
 
     context.fillStyle = "#98A3AB";
     context.font = "500 16px system-ui, sans-serif";
-    context.fillText("把“待会儿再说”换成一个呼吸。", 121, 647);
+    context.fillText(isEnglish ? "Replace “later” with one breath." : "把“待会儿再说”换成一个呼吸。", 121, 647);
 
     resetInteractionState();
     analyzeImage();
@@ -339,7 +765,7 @@
 
   function importImage(file) {
     if (!file || !file.type || file.type.indexOf("image/") !== 0) {
-      setStageHint("请选择 PNG、JPG、WebP、GIF 或 SVG 图片。");
+      setStageHint(t("stage.invalidFile"));
       return;
     }
 
@@ -347,7 +773,8 @@
     reader.onload = function (event) {
       var image = new Image();
       image.onload = function () {
-        state.title = file.name.replace(/\.[^/.]+$/, "") || "未命名成品图";
+        state.isDemo = false;
+        state.title = file.name.replace(/\.[^/.]+$/, "") || t("image.untitled");
         state.originalWidth = image.naturalWidth;
         state.originalHeight = image.naturalHeight;
         setSourceDimensions(image.naturalWidth, image.naturalHeight);
@@ -356,10 +783,10 @@
         resetInteractionState();
         analyzeImage();
         render();
-        setStageHint("已导入。先框选标题、价格或按钮，再切换不同视图检查。");
+        setStageHint(t("stage.imported"));
       };
       image.onerror = function () {
-        setStageHint("这张图片暂时无法读取，请换一张 PNG、JPG、WebP 或 SVG。");
+        setStageHint(t("stage.unreadable"));
       };
       image.src = event.target.result;
     };
@@ -470,7 +897,7 @@
       overlayContext.fillStyle = "rgba(244, 201, 75, 0.16)";
       overlayContext.fillRect(drawArea.x, drawArea.y, drawArea.width, drawArea.height);
       overlayContext.strokeRect(drawArea.x, drawArea.y, drawArea.width, drawArea.height);
-      var label = "关键 " + (index + 1);
+      var label = t("overlay.keyArea", { count: index + 1 });
       overlayContext.font = "700 " + Math.max(11, width / 55) + "px system-ui, sans-serif";
       var labelWidth = overlayContext.measureText(label).width + 12;
       var labelHeight = Math.max(18, width / 27);
@@ -577,9 +1004,9 @@
       state.keyAreas.push(toRelativeArea(area));
       state.marking = false;
       updateMarkingUi();
-      setStageHint("已标注 1 个关键区域。你可以继续取 A / B 色，或切换不同视图检查。");
+      setStageHint(t("stage.marked"));
     } else {
-      setStageHint("框选区域太小了。请把标题、按钮或价格完整框起来。");
+      setStageHint(t("stage.areaTooSmall"));
     }
 
     state.pointerStart = null;
@@ -593,10 +1020,10 @@
 
   function updateMarkingUi() {
     dom.canvasStage.dataset.marking = String(state.marking);
-    dom.markAreaButton.textContent = state.marking ? "完成框选" : "框选关键区域";
+    dom.markAreaButton.textContent = state.marking ? t("marking.finish") : t("marking.start");
     dom.markingStatus.textContent = state.marking
-      ? "框选模式已开启：在图片上拖拽，标出一块必须看清的内容。"
-      : "准备就绪：点击“框选关键区域”后，在画面上拖拽。";
+      ? t("marking.active")
+      : t("marking.idle");
   }
 
   function updateSampleControls() {
@@ -721,30 +1148,33 @@
     dom.findingsList.innerHTML = "";
 
     if (!state.keyAreas.length) {
-      addFinding("note", "还没有标出关键区域。先圈标题、价格、CTA 或错误提示，检查才有重点。");
+      addFinding("note", t("findings.noAreas"));
     } else {
-      addFinding("good", "已记录 " + state.keyAreas.length + " 个关键区域。切换视图时请优先看它们。");
+      addFinding("good", t("findings.areasRecorded", { count: state.keyAreas.length }));
     }
 
     if (!contrastResult) {
-      addFinding("note", "还没有测实际 A / B 色对。图片里的文字常常需要手动取样确认。");
+      addFinding("note", t("findings.noSamples"));
     } else if (contrastResult.status === "pass") {
-      addFinding("good", "当前 A / B 色对达到 4.5:1 参考线，可作为常规正文的良好起点。");
+      addFinding("good", t("findings.contrastPass"));
     } else if (contrastResult.status === "warn") {
-      addFinding("risk", "当前 A / B 色对低于 4.5:1。若是常规正文，建议再提高明暗差。");
+      addFinding("risk", t("findings.contrastWarn"));
     } else {
-      addFinding("risk", "当前 A / B 色对低于 3:1。小字、浅字或移动场景下尤其容易消失。");
+      addFinding("risk", t("findings.contrastFail"));
     }
 
     if (state.potentialRisks.length) {
       var risk = state.potentialRisks[0];
       addFinding(
         "risk",
-        "主色 " + rgbToHex(risk.first) + " 与 " + rgbToHex(risk.second) +
-          " 在" + modeLabels[risk.mode] + "中可能接近；不要只用颜色区分状态。"
+        t("findings.colorRisk", {
+          first: rgbToHex(risk.first),
+          second: rgbToHex(risk.second),
+          mode: modeLabel(risk.mode)
+        })
       );
     } else if (state.palette.length) {
-      addFinding("good", "主要颜色在三种色觉模拟中没有出现明显的近似色对。仍建议人工查看关键区域。");
+      addFinding("good", t("findings.noColorRisk"));
     }
   }
 
@@ -757,35 +1187,35 @@
       swatch.title = rgbToHex(color);
       dom.paletteGrid.appendChild(swatch);
     });
-    dom.paletteCount.textContent = state.palette.length ? state.palette.length + " 色" : "—";
+    dom.paletteCount.textContent = state.palette.length ? t("palette.count", { count: state.palette.length }) : "—";
   }
 
   function updateReadiness(contrastResult) {
     var areas = state.keyAreas.length;
     if (!areas && !contrastResult) {
-      dom.readinessEyebrow.textContent = "还没有足够信息";
-      dom.readinessTitle.textContent = "先标出重要信息";
-      dom.readinessCopy.textContent = "这不是打分器；关键内容和实际色对都值得人工确认。";
+      dom.readinessEyebrow.textContent = t("readiness.emptyEyebrow");
+      dom.readinessTitle.textContent = t("readiness.emptyTitle");
+      dom.readinessCopy.textContent = t("readiness.emptyCopy");
       return;
     }
 
     if (areas && !contrastResult) {
-      dom.readinessEyebrow.textContent = "已建立审查重点";
-      dom.readinessTitle.textContent = "重点已圈出，再取一组色";
-      dom.readinessCopy.textContent = "切换小屏、灰阶和色觉模拟，看看这 " + areas + " 处信息是否还成立。";
+      dom.readinessEyebrow.textContent = t("readiness.areasEyebrow");
+      dom.readinessTitle.textContent = t("readiness.areasTitle");
+      dom.readinessCopy.textContent = t("readiness.areasCopy", { count: areas });
       return;
     }
 
     if (contrastResult.status === "pass") {
-      dom.readinessEyebrow.textContent = "完成一项精确核对";
-      dom.readinessTitle.textContent = "继续做情境检查";
-      dom.readinessCopy.textContent = "A / B 已达到正文参考线；接下来检查小屏和灰阶下的信息层级。";
+      dom.readinessEyebrow.textContent = t("readiness.passEyebrow");
+      dom.readinessTitle.textContent = t("readiness.passTitle");
+      dom.readinessCopy.textContent = t("readiness.passCopy");
       return;
     }
 
-    dom.readinessEyebrow.textContent = "发现可调整点";
-    dom.readinessTitle.textContent = "关键信息可能偏弱";
-    dom.readinessCopy.textContent = "先加大文字与背景的明暗差，再重新取样核对。";
+    dom.readinessEyebrow.textContent = t("readiness.riskEyebrow");
+    dom.readinessTitle.textContent = t("readiness.riskTitle");
+    dom.readinessCopy.textContent = t("readiness.riskCopy");
   }
 
   function updateReport() {
@@ -795,23 +1225,32 @@
     dom.riskMetric.textContent = state.palette.length ? String(state.potentialRisks.length) : "—";
 
     if (!contrastResult) {
-      dom.contrastRatio.textContent = "等待取色";
-      dom.contrastBadge.textContent = "未检查";
+      dom.contrastRatio.textContent = t("contrast.waiting");
+      dom.contrastBadge.textContent = t("contrast.unchecked");
       dom.contrastBadge.className = "contrast-badge";
-      dom.contrastDetail.textContent = "取样后会按照 WCAG 的文字对比度阈值给出提示。";
+      dom.contrastDetail.textContent = t("contrast.waitingDetail");
     } else {
       var ratioText = contrastResult.ratio.toFixed(2) + ":1";
       dom.contrastRatio.textContent = ratioText;
       dom.contrastBadge.className = "contrast-badge is-" + contrastResult.status;
       if (contrastResult.status === "pass") {
-        dom.contrastBadge.textContent = "正文 AA 参考";
-        dom.contrastDetail.textContent = rgbToHex(state.samples.a.rgb) + " / " + rgbToHex(state.samples.b.rgb) + "。常规文字可把 4.5:1 当作参考线。";
+        dom.contrastBadge.textContent = t("contrast.passBadge");
+        dom.contrastDetail.textContent = t("contrast.passDetail", {
+          first: rgbToHex(state.samples.a.rgb),
+          second: rgbToHex(state.samples.b.rgb)
+        });
       } else if (contrastResult.status === "warn") {
-        dom.contrastBadge.textContent = "仅大字参考";
-        dom.contrastDetail.textContent = rgbToHex(state.samples.a.rgb) + " / " + rgbToHex(state.samples.b.rgb) + "。达到 3:1，但常规正文通常还不够。";
+        dom.contrastBadge.textContent = t("contrast.warnBadge");
+        dom.contrastDetail.textContent = t("contrast.warnDetail", {
+          first: rgbToHex(state.samples.a.rgb),
+          second: rgbToHex(state.samples.b.rgb)
+        });
       } else {
-        dom.contrastBadge.textContent = "建议调整";
-        dom.contrastDetail.textContent = rgbToHex(state.samples.a.rgb) + " / " + rgbToHex(state.samples.b.rgb) + "。低于 3:1，建议先拉开明暗差。";
+        dom.contrastBadge.textContent = t("contrast.failBadge");
+        dom.contrastDetail.textContent = t("contrast.failDetail", {
+          first: rgbToHex(state.samples.a.rgb),
+          second: rgbToHex(state.samples.b.rgb)
+        });
       }
     }
 
@@ -822,19 +1261,19 @@
 
   function updateStageHint() {
     if (state.marking) {
-      dom.stageHint.textContent = "框选模式：拖拽圈出标题、按钮、价格或任何必须看清的内容。";
+      dom.stageHint.textContent = t("stage.marking");
       return;
     }
     if (state.mode === "small") {
-      dom.stageHint.textContent = "小屏模拟：现在以 320px 宽度重绘。看重点信息会不会被压小。";
+      dom.stageHint.textContent = t("stage.small");
       return;
     }
     if (state.mode !== "original") {
-      dom.stageHint.textContent = modeLabels[state.mode] + "仅用于风险预览。观察关键信息是否仍可区分。";
+      dom.stageHint.textContent = t("stage.simulation", { mode: modeLabel(state.mode) });
       return;
     }
-    var next = state.activeSample === "a" ? "A 文字色" : "B 背景色";
-    dom.stageHint.textContent = "正在查看原图。点击画面可取样 " + next + "。";
+    var next = state.activeSample === "a" ? t("stage.sampleA") : t("stage.sampleB");
+    dom.stageHint.textContent = t("stage.original", { sample: next });
   }
 
   function setStageHint(text) {
@@ -868,7 +1307,7 @@
     exportCanvas.toBlob(function (blob) {
       if (blob) {
         triggerDownload(blob, cleanFileName(state.title) + "-" + state.mode + "-sightline.png");
-        setStageHint("已导出当前视图 PNG。");
+        setStageHint(t("stage.imageExported"));
       }
     }, "image/png");
   }
@@ -876,7 +1315,7 @@
   function exportReport() {
     var contrastResult = getContrastResult();
     var report = {
-      tool: "Sightline v0.1.0-alpha.1",
+      tool: "Sightline " + VERSION,
       generatedAt: new Date().toISOString(),
       localOnly: true,
       image: {
@@ -885,12 +1324,12 @@
           width: state.originalWidth,
           height: state.originalHeight
         },
-        previewScene: targetLabels[state.target],
-        activeView: modeLabels[state.mode]
+        previewScene: targetLabel(state.target),
+        activeView: modeLabel(state.mode)
       },
       keyAreas: state.keyAreas.map(function (area, index) {
         return {
-          label: "关键 " + (index + 1),
+          label: t("overlay.keyArea", { count: index + 1 }),
           normalizedBounds: area
         };
       }),
@@ -909,25 +1348,33 @@
         return {
           first: rgbToHex(risk.first),
           second: rgbToHex(risk.second),
-          simulation: modeLabels[risk.mode]
+          simulation: modeLabel(risk.mode)
         };
       }),
       disclaimer: "A local design-review aid, not a formal accessibility conformance report or substitute for testing with real users."
     };
     var blob = new Blob([JSON.stringify(report, null, 2)], { type: "application/json;charset=utf-8" });
     triggerDownload(blob, cleanFileName(state.title) + "-sightline-report.json");
-    setStageHint("已下载本地预检记录 JSON。");
+    setStageHint(t("stage.reportExported"));
   }
 
   function setMode(mode) {
     state.mode = mode;
     $$(".mode-tab").forEach(function (button) {
-      button.classList.toggle("is-selected", button.dataset.mode === mode);
+      var isSelected = button.dataset.mode === mode;
+      button.classList.toggle("is-selected", isSelected);
+      button.setAttribute("aria-selected", String(isSelected));
     });
     render();
   }
 
   function wireEvents() {
+    if (dom.languageButton) {
+      dom.languageButton.addEventListener("click", function () {
+        setLanguage(state.language === "en" ? "zh" : "en");
+      });
+    }
+
     dom.uploadButton.addEventListener("click", function () {
       dom.fileInput.click();
     });
@@ -966,7 +1413,7 @@
 
     dom.demoButton.addEventListener("click", function () {
       loadDemo();
-      setStageHint("已载入演示图。里面刻意放了几种常见的可读性风险。");
+      setStageHint(t("stage.demoLoaded"));
     });
 
     dom.targetPreset.addEventListener("change", function (event) {
@@ -991,7 +1438,7 @@
       state.draftArea = null;
       drawOverlay();
       updateReport();
-      setStageHint("已清空关键区域。");
+      setStageHint(t("stage.areasCleared"));
     });
 
     dom.sampleAButton.addEventListener("click", function () {
@@ -1033,7 +1480,7 @@
     dom.refreshAnalysisButton.addEventListener("click", function () {
       analyzeImage();
       updateReport();
-      setStageHint("已重新分析画面主色与潜在混淆色。");
+      setStageHint(t("stage.analysisRefreshed"));
     });
 
     dom.exportImageButton.addEventListener("click", exportCurrentImage);
@@ -1056,6 +1503,7 @@
     });
   }
 
+  applyStaticTranslations();
   wireEvents();
   loadDemo();
 }());
