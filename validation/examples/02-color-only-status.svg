@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">颜色状态测试样本</title>
+  <desc id="desc">一个界面把成功和失败主要依赖红绿颜色区分。</desc>
+  <rect width="1200" height="760" fill="#f5f6f8"/>
+  <rect width="1200" height="74" fill="#1d2736"/>
+  <text x="52" y="47" fill="#ffffff" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="25" font-weight="700">订单中心</text>
+  <rect x="40" y="116" width="234" height="602" rx="16" fill="#ffffff"/>
+  <text x="72" y="180" fill="#718095" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="22">概览</text>
+  <text x="72" y="242" fill="#2e3a4b" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="22" font-weight="700">待处理订单</text>
+  <text x="72" y="304" fill="#718095" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="22">退款记录</text>
+  <rect x="310" y="116" width="850" height="602" rx="16" fill="#ffffff"/>
+  <text x="354" y="182" fill="#1f2b3a" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="34" font-weight="700">本周处理结果</text>
+  <text x="354" y="222" fill="#8995a5" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="20">测试 02：切换红弱和绿弱视图，判断状态是否还清楚。</text>
+  <line x1="354" y1="270" x2="1118" y2="270" stroke="#e7ebef" stroke-width="2"/>
+  <text x="354" y="332" fill="#758397" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="19">订单编号</text>
+  <text x="670" y="332" fill="#758397" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="19">客户</text>
+  <text x="932" y="332" fill="#758397" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="19">状态</text>
+  <line x1="354" y1="362" x2="1118" y2="362" stroke="#e7ebef" stroke-width="2"/>
+  <text x="354" y="427" fill="#2b3748" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="24">#A-1024</text>
+  <text x="670" y="427" fill="#2b3748" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="24">冬青</text>
+  <circle cx="946" cy="419" r="18" fill="#59aa63"/>
+  <text x="978" y="427" fill="#59aa63" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="24" font-weight="700">已完成</text>
+  <line x1="354" y1="466" x2="1118" y2="466" stroke="#e7ebef" stroke-width="2"/>
+  <text x="354" y="532" fill="#2b3748" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="24">#A-1025</text>
+  <text x="670" y="532" fill="#2b3748" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="24">木棉</text>
+  <circle cx="946" cy="524" r="18" fill="#d6665c"/>
+  <text x="978" y="532" fill="#d6665c" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="24" font-weight="700">处理失败</text>
+  <line x1="354" y1="571" x2="1118" y2="571" stroke="#e7ebef" stroke-width="2"/>
+  <text x="354" y="650" fill="#8390a0" font-family="Arial, PingFang SC, Microsoft YaHei, sans-serif" font-size="20">提示：颜色不同，不等于所有人都能立即理解状态不同。</text>
+</svg>
