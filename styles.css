@@ -168,6 +168,35 @@ select:focus-visible {
   box-shadow: 0 0 0 3px rgba(37, 143, 121, 0.13);
 }
 
+.language-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  min-width: 50px;
+  min-height: 37px;
+  padding: 7px 9px;
+  border: 1px solid rgba(32, 32, 37, 0.15);
+  border-radius: 9px;
+  color: #55545c;
+  background: rgba(255, 254, 250, 0.76);
+  font-size: 0.73rem;
+  font-weight: 760;
+  line-height: 1;
+  transition: transform 150ms ease, border-color 150ms ease, background 150ms ease;
+}
+
+.language-toggle > span:first-child {
+  color: var(--violet);
+  font-size: 0.86rem;
+}
+
+.language-toggle:hover {
+  border-color: rgba(109, 91, 232, 0.48);
+  background: rgba(235, 232, 255, 0.62);
+  transform: translateY(-1px);
+}
+
 .button {
   min-height: 37px;
   padding: 9px 13px;
