@@ -1,0 +1,13 @@
+# Operating-system files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Local release exports
+*.zip
+*.tar.gz
+
+# Local notes and temporary files
+*.tmp
+*.bak
+*.log
