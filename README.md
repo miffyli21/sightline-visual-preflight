@@ -4,6 +4,15 @@
 
 Sightline 是一个完全本地运行的浏览器小工具。它不上传图片、不要求登录，也不试图替代正式无障碍审计；它的用途是让设计师、内容创作者和产品团队在交付前多看一眼真实导出的成品。
 
+English: [README.en.md](./README.en.md)
+
+## 在线试用
+
+- 中文：[打开 Sightline](https://miffyli21.github.io/sightline-visual-preflight/?lang=zh)
+- English: [Try Sightline in English](https://miffyli21.github.io/sightline-visual-preflight/?lang=en)
+
+界面右上角也可以随时切换中英文。图片只在你的当前浏览器中处理。
+
 ## 第一版能做什么
 
 - 导入 PNG、JPG、WebP 或 GIF 的第一帧；
@@ -19,7 +28,7 @@ Sightline 是一个完全本地运行的浏览器小工具。它不上传图片�
 
 最简单的方式：
 
-1. 下载或解压这个项目；
+1. 直接打开上方在线试用链接，或下载/解压这个项目；
 2. 双击“打开 Sightline.bat”，或直接用浏览器打开 index.html；
 3. 点击“导入成品图”。
 
@@ -50,7 +59,7 @@ Sightline 是一个完全本地运行的浏览器小工具。它不上传图片�
 
 ## 路线图
 
-### v0.1.0-alpha.1 · 当前版本
+### v0.1.0-alpha.2 · 当前版本
 
 - [x] 本地图片导入
 - [x] 多种视觉压力测试
@@ -58,6 +67,7 @@ Sightline 是一个完全本地运行的浏览器小工具。它不上传图片�
 - [x] 两点对比度检测
 - [x] 主色混淆风险提示
 - [x] PNG / JSON 导出
+- [x] 中英文界面、示例图和使用说明
 
 ### 下一步值得验证
 
@@ -78,7 +88,7 @@ styles.css
 app.js
 ~~~
 
-只需编辑文件后刷新浏览器即可。任何贡献都请先阅读 [CONTRIBUTING.md](./CONTRIBUTING.md)。
+只需编辑文件后刷新浏览器即可。任何贡献都请先阅读 [CONTRIBUTING.md](./CONTRIBUTING.md)；英文贡献说明见 [CONTRIBUTING.en.md](./CONTRIBUTING.en.md)。
 
 ## 参与第一轮验证
 
@@ -86,7 +96,7 @@ app.js
 
 ## Alpha 状态
 
-当前版本是 v0.1.0-alpha.1。功能可以使用，但检查逻辑、措辞和导出格式都仍在等待真实工作流反馈。欢迎报告误导性提示、难理解的步骤和隐私问题；不要把工具的结果当作正式合规结论。
+当前版本是 v0.1.0-alpha.2。功能可以使用，但检查逻辑、措辞和导出格式都仍在等待真实工作流反馈。欢迎报告误导性提示、难理解的步骤和隐私问题；不要把工具的结果当作正式合规结论。
 
 ## 许可
 
