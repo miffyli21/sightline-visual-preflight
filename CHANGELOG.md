@@ -2,6 +2,13 @@
 
 All notable changes are documented here.
 
+## v0.1.0-alpha.2 — 2026-08-12
+
+- Chinese and English interface, with a shareable `?lang=en` or `?lang=zh` language URL;
+- Localized guidance, findings, contrast labels, and JSON-record display labels;
+- English demo graphic, README, contribution guide, and validation script;
+- No change to the local-only, no-account image-processing model.
+
 ## v0.1.0-alpha.1 — 2026-08-12
 
 First public-alpha candidate.
