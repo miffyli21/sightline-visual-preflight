@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
+      id="pageDescription"
       name="description"
       content="Sightline：在发布前检查海报、社媒图和 UI 截图是否看得清。"
     />
@@ -25,19 +26,22 @@
         </div>
 
         <div class="topbar-actions">
-          <span class="local-badge"><i></i>图片不会离开你的设备</span>
-          <button class="button button-quiet" id="demoButton" type="button">载入示例</button>
-          <button class="button button-primary" id="uploadButton" type="button">导入成品图</button>
+          <span class="local-badge"><i></i><span data-i18n="topbar.localOnly">图片不会离开你的设备</span></span>
+          <button id="languageButton" class="language-toggle" type="button" aria-label="切换到英文" title="切换到英文">
+            <span aria-hidden="true">文</span><span id="languageButtonText">EN</span>
+          </button>
+          <button class="button button-quiet" id="demoButton" type="button" data-i18n="topbar.loadDemo">载入示例</button>
+          <button class="button button-primary" id="uploadButton" type="button" data-i18n="topbar.importImage">导入成品图</button>
           <input id="fileInput" type="file" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml" hidden />
         </div>
       </header>
 
       <section class="intro-strip">
         <div>
-          <p class="kicker">发布前的最后一眼</p>
-          <h2>别只看它“好不好看”，也看看它<span>能不能被看清。</span></h2>
+          <p class="kicker" data-i18n="intro.kicker">发布前的最后一眼</p>
+          <h2><span data-i18n="intro.headBefore">别只看它“好不好看”，也看看它</span><span data-i18n="intro.headHighlight">能不能被看清。</span></h2>
         </div>
-        <p>
+        <p data-i18n="intro.copy">
           面向海报、社媒图和 UI 截图的本地视觉预检。这里给的是风险提示，不是无障碍合规认证。
         </p>
       </section>
@@ -46,34 +50,34 @@
         <aside class="control-panel panel">
           <div class="panel-heading">
             <p class="eyebrow">01 / INPUT</p>
-            <h3>成品与场景</h3>
+            <h3 data-i18n="input.heading">成品与场景</h3>
           </div>
 
           <button id="dropZone" class="drop-zone" type="button">
-            <span class="drop-zone-icon">↥</span>
-            <strong>拖入 PNG / JPG / WebP / SVG</strong>
-            <small>或点这里导入已经导出的视觉成品</small>
+            <span class="drop-zone-icon">→</span>
+            <strong data-i18n="input.dropTitle">拖入 PNG / JPG / WebP / SVG</strong>
+            <small data-i18n="input.dropCopy">或点这里导入已经导出的视觉成品</small>
           </button>
 
-          <label class="field-label" for="targetPreset">预览场景</label>
+          <label class="field-label" for="targetPreset" data-i18n="input.previewScene">预览场景</label>
           <select id="targetPreset" class="select-control">
-            <option value="phone">手机信息流 · 390px 宽</option>
-            <option value="desktop">桌面网页 · 1280px 宽</option>
-            <option value="poster">远看海报 · 缩略预览</option>
+            <option value="phone" data-i18n="target.phoneOption">手机信息流 · 390px 宽</option>
+            <option value="desktop" data-i18n="target.desktopOption">桌面网页 · 1280px 宽</option>
+            <option value="poster" data-i18n="target.posterOption">远看海报 · 缩略预览</option>
           </select>
 
           <div class="section-rule"></div>
 
           <div class="panel-heading compact">
             <p class="eyebrow">02 / KEY MESSAGE</p>
-            <h3>标出必须看清的内容</h3>
+            <h3 data-i18n="keyMessage.heading">标出必须看清的内容</h3>
           </div>
-          <p class="helper-copy">
+          <p class="helper-copy" data-i18n="keyMessage.copy">
             例如标题、价格、报名方式、错误提示。拖拽框选后，它会被带进本地验收记录。
           </p>
           <div class="button-row">
             <button id="markAreaButton" class="button button-secondary" type="button">框选关键区域</button>
-            <button id="clearAreasButton" class="button button-quiet" type="button">清空</button>
+            <button id="clearAreasButton" class="button button-quiet" type="button" data-i18n="keyMessage.clear">清空</button>
           </div>
           <p id="markingStatus" class="micro-status">准备就绪：可直接在画面上拖拽。</p>
 
@@ -81,22 +85,22 @@
 
           <div class="panel-heading compact">
             <p class="eyebrow">03 / EXACT CHECK</p>
-            <h3>取两点，测一次真实对比</h3>
+            <h3 data-i18n="exact.heading">取两点，测一次真实对比</h3>
           </div>
-          <p class="helper-copy">
+          <p class="helper-copy" data-i18n="exact.copy">
             依次点击文字色与背景色。对带渐变、阴影或照片底图的文字尤其有用。
           </p>
           <div class="sample-controls">
             <button id="sampleAButton" class="sample-button is-active" type="button">
               <span class="sample-dot" id="sampleADot"></span>
-              <span><b>A</b> 取文字色</span>
+              <span><b>A</b> <span data-i18n="exact.sampleA">取文字色</span></span>
             </button>
             <button id="sampleBButton" class="sample-button" type="button">
               <span class="sample-dot" id="sampleBDot"></span>
-              <span><b>B</b> 取背景色</span>
+              <span><b>B</b> <span data-i18n="exact.sampleB">取背景色</span></span>
             </button>
           </div>
-          <button id="resetSamplesButton" class="text-button" type="button">重置取色</button>
+          <button id="resetSamplesButton" class="text-button" type="button" data-i18n="exact.reset">重置取色</button>
         </aside>
 
         <section class="canvas-panel panel">
@@ -108,18 +112,18 @@
             <span id="imageMeta" class="canvas-meta">1200 × 800 px</span>
           </div>
 
-          <div class="mode-tabs" role="tablist" aria-label="视觉模拟模式">
-            <button class="mode-tab is-selected" data-mode="original" type="button">原图</button>
-            <button class="mode-tab" data-mode="small" type="button">小屏</button>
-            <button class="mode-tab" data-mode="gray" type="button">灰阶</button>
-            <button class="mode-tab" data-mode="protanopia" type="button">红弱模拟</button>
-            <button class="mode-tab" data-mode="deuteranopia" type="button">绿弱模拟</button>
-            <button class="mode-tab" data-mode="tritanopia" type="button">蓝弱模拟</button>
+          <div class="mode-tabs" role="tablist" aria-label="视觉模拟模式" data-i18n-aria-label="aria.modeTabs">
+            <button class="mode-tab is-selected" data-mode="original" type="button" data-i18n="mode.original">原图</button>
+            <button class="mode-tab" data-mode="small" type="button" data-i18n="mode.small">小屏</button>
+            <button class="mode-tab" data-mode="gray" type="button" data-i18n="mode.gray">灰阶</button>
+            <button class="mode-tab" data-mode="protanopia" type="button" data-i18n="mode.protanopia">红弱模拟</button>
+            <button class="mode-tab" data-mode="deuteranopia" type="button" data-i18n="mode.deuteranopia">绿弱模拟</button>
+            <button class="mode-tab" data-mode="tritanopia" type="button" data-i18n="mode.tritanopia">蓝弱模拟</button>
           </div>
 
           <div id="canvasStage" class="canvas-stage" data-marking="false">
             <div id="canvasScaleWrap" class="canvas-scale-wrap">
-              <canvas id="viewCanvas" aria-label="成品图预览"></canvas>
+              <canvas id="viewCanvas" aria-label="成品图预览" data-i18n-aria-label="aria.canvas"></canvas>
               <canvas id="overlayCanvas" aria-hidden="true"></canvas>
             </div>
             <p id="stageHint" class="stage-hint">正在查看原图。点击画面可取样 A / B 颜色。</p>
@@ -127,18 +131,18 @@
 
           <div class="canvas-footer">
             <div class="legend">
-              <span><i class="legend-swatch legend-key"></i>关键区域</span>
-              <span><i class="legend-swatch legend-sample-a"></i>A 文字色</span>
-              <span><i class="legend-swatch legend-sample-b"></i>B 背景色</span>
+              <span><i class="legend-swatch legend-key"></i><span data-i18n="legend.keyArea">关键区域</span></span>
+              <span><i class="legend-swatch legend-sample-a"></i><span>A <span data-i18n="legend.sampleA">文字色</span></span></span>
+              <span><i class="legend-swatch legend-sample-b"></i><span>B <span data-i18n="legend.sampleB">背景色</span></span></span>
             </div>
-            <button id="exportImageButton" class="button button-secondary" type="button">导出当前视图 PNG</button>
+            <button id="exportImageButton" class="button button-secondary" type="button" data-i18n="export.image">导出当前视图 PNG</button>
           </div>
         </section>
 
         <aside class="report-panel panel">
           <div class="panel-heading">
             <p class="eyebrow">LOCAL CHECKLIST</p>
-            <h3>预检记录</h3>
+            <h3 data-i18n="report.heading">预检记录</h3>
           </div>
 
           <div class="report-hero">
@@ -149,22 +153,22 @@
 
           <div class="metric-grid">
             <div class="metric">
-              <span>关键区域</span>
+              <span data-i18n="report.keyAreas">关键区域</span>
               <strong id="areaMetric">0</strong>
             </div>
             <div class="metric">
-              <span>已测色对</span>
+              <span data-i18n="report.sampledPairs">已测色对</span>
               <strong id="sampleMetric">0</strong>
             </div>
             <div class="metric">
-              <span>潜在混淆色</span>
+              <span data-i18n="report.potentialRisks">潜在混淆色</span>
               <strong id="riskMetric">—</strong>
             </div>
           </div>
 
           <div class="contrast-card">
             <div>
-              <p class="card-label">当前 A / B 对比度</p>
+              <p class="card-label" data-i18n="contrast.heading">当前 A / B 对比度</p>
               <strong id="contrastRatio">等待取色</strong>
             </div>
             <span id="contrastBadge" class="contrast-badge">未检查</span>
@@ -172,40 +176,40 @@
           </div>
 
           <div class="findings-heading">
-            <p class="card-label">可能需要看一眼</p>
-            <button id="refreshAnalysisButton" class="text-button" type="button">刷新</button>
+            <p class="card-label" data-i18n="findings.heading">可能需要看一眼</p>
+            <button id="refreshAnalysisButton" class="text-button" type="button" data-i18n="findings.refresh">刷新</button>
           </div>
           <ul id="findingsList" class="findings-list" aria-live="polite"></ul>
 
           <div class="palette-heading">
-            <p class="card-label">画面主色</p>
+            <p class="card-label" data-i18n="palette.heading">画面主色</p>
             <span id="paletteCount">—</span>
           </div>
           <div id="paletteGrid" class="palette-grid"></div>
 
-          <button id="exportReportButton" class="button button-primary report-export" type="button">下载本地预检记录</button>
+          <button id="exportReportButton" class="button button-primary report-export" type="button" data-i18n="export.report">下载本地预检记录</button>
         </aside>
       </section>
 
       <footer class="app-footer">
-        <p>
-          Sightline v0.1.0-alpha.1 · 本地浏览器工具。模拟结果用于设计审查，不替代真实用户测试、屏幕阅读器测试或正式合规审计。
+        <p data-i18n="footer.copy">
+          Sightline v0.1.0-alpha.2 · 本地浏览器工具。模拟结果用于设计审查，不替代真实用户测试、屏幕阅读器测试或正式合规审计。
         </p>
-        <button id="aboutButton" class="text-button" type="button">怎么使用？</button>
+        <button id="aboutButton" class="text-button" type="button" data-i18n="footer.howTo">怎么使用？</button>
       </footer>
     </main>
 
     <dialog id="aboutDialog" class="about-dialog">
-      <button id="closeAboutButton" class="dialog-close" type="button" aria-label="关闭">×</button>
+      <button id="closeAboutButton" class="dialog-close" type="button" aria-label="关闭" data-i18n-aria-label="aria.close">×</button>
       <p class="eyebrow">HOW TO USE</p>
-      <h2>三分钟，给一张成品图多看几眼。</h2>
+      <h2 data-i18n="about.heading">三分钟，给一张成品图多看几眼。</h2>
       <ol>
-        <li>导入已经导出的海报、社媒图或 UI 截图。</li>
-        <li>切换小屏、灰阶与不同色觉模拟，观察关键信息是否还成立。</li>
-        <li>框选标题、价格、按钮等重点，再用 A / B 取色测实际对比度。</li>
-        <li>把本地预检记录附在设计验收或交付里。</li>
+        <li data-i18n="about.step1">导入已经导出的海报、社媒图或 UI 截图。</li>
+        <li data-i18n="about.step2">切换小屏、灰阶与不同色觉模拟，观察关键信息是否还成立。</li>
+        <li data-i18n="about.step3">框选标题、价格、按钮等重点，再用 A / B 取色测实际对比度。</li>
+        <li data-i18n="about.step4">把本地预检记录附在设计验收或交付里。</li>
       </ol>
-      <p class="dialog-note">所有处理均在当前浏览器完成，不会上传图片。</p>
+      <p class="dialog-note" data-i18n="about.note">所有处理均在当前浏览器完成，不会上传图片。</p>
     </dialog>
 
     <script src="./app.js"></script>
