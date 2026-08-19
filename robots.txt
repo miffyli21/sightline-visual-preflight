@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://miffyli21.github.io/sightline-visual-preflight/sitemap.xml

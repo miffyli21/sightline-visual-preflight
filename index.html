@@ -6,10 +6,44 @@
     <meta
       id="pageDescription"
       name="description"
-      content="Sightline：在发布前检查海报、社媒图和 UI 截图是否看得清。"
+      content="免费、本地运行的设计可读性检查工具：导入海报、社媒图或 UI 截图，快速检查小屏、灰阶、色觉模拟与文字对比度。无需登录，图片不上传。"
     />
-    <title>Sightline · 视觉成品预检</title>
-    <link rel="stylesheet" href="./styles.css?v=0.1.0-alpha.2" />
+    <meta name="keywords" content="设计检查, 海报检查, 社媒图片, UI 截图, 文字对比度, 色弱模拟, 可读性, accessibility, visual preflight" />
+    <meta name="robots" content="index,follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Sightline · 发布前检查设计是否看得清" />
+    <meta property="og:description" content="导入海报、社媒图或 UI 截图，快速检查小字、对比度和色觉风险。完全本地运行，图片不上传。" />
+    <meta property="og:url" content="https://miffyli21.github.io/sightline-visual-preflight/" />
+    <meta property="og:image" content="https://miffyli21.github.io/sightline-visual-preflight/docs/sightline-demo-zh.png" />
+    <meta property="og:image:width" content="1265" />
+    <meta property="og:image:height" content="712" />
+    <meta property="og:image:alt" content="Sightline checking a social graphic for small-text and contrast risks" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://miffyli21.github.io/sightline-visual-preflight/" />
+    <link rel="alternate" hreflang="zh-CN" href="https://miffyli21.github.io/sightline-visual-preflight/?lang=zh" />
+    <link rel="alternate" hreflang="en" href="https://miffyli21.github.io/sightline-visual-preflight/?lang=en" />
+    <link rel="alternate" hreflang="x-default" href="https://miffyli21.github.io/sightline-visual-preflight/" />
+    <title>Sightline · 发布前检查设计是否看得清</title>
+    <link rel="stylesheet" href="./styles.css?v=20260820" />
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Sightline",
+        "applicationCategory": "DesignApplication",
+        "operatingSystem": "Any",
+        "url": "https://miffyli21.github.io/sightline-visual-preflight/",
+        "codeRepository": "https://github.com/miffyli21/sightline-visual-preflight",
+        "description": "A free, local-first tool for checking readability risks in posters, social graphics, and UI screenshots.",
+        "softwareVersion": "0.1.0-alpha.2",
+        "isAccessibleForFree": true,
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD"
+        }
+      }
+    </script>
   </head>
   <body>
     <div class="page-grain" aria-hidden="true"></div>
@@ -36,14 +70,23 @@
         </div>
       </header>
 
-      <section class="intro-strip">
-        <div>
-          <p class="kicker" data-i18n="intro.kicker">发布前的最后一眼</p>
-          <h2><span data-i18n="intro.headBefore">别只看它“好不好看”，也看看它</span><span data-i18n="intro.headHighlight">能不能被看清。</span></h2>
+      <section class="intro-strip" aria-labelledby="introTitle">
+        <div class="intro-main">
+          <p class="kicker" data-i18n="intro.kicker">海报 / 社媒图 / UI 截图</p>
+          <h2 id="introTitle"><span data-i18n="intro.headBefore">导入设计成品，快速检查</span><span class="intro-highlight" data-i18n="intro.headHighlight">小字、对比度和色觉风险。</span></h2>
+          <div class="intro-actions">
+            <button id="heroUploadButton" class="button button-primary" type="button" data-i18n="intro.primaryCta">立即检查我的设计</button>
+            <button id="heroDemoButton" class="button button-secondary" type="button" data-i18n="intro.demoCta">先看风险示例</button>
+          </div>
         </div>
-        <p data-i18n="intro.copy">
-          面向海报、社媒图和 UI 截图的本地视觉预检。这里给的是风险提示，不是无障碍合规认证。
-        </p>
+        <div class="intro-aside">
+          <p data-i18n="intro.copy">无需安装或登录。图片只在当前浏览器中处理；这里给的是发布前风险提示，不是无障碍合规认证。</p>
+          <ul class="intro-proof" aria-label="产品特点" data-i18n-aria-label="aria.productProof">
+            <li data-i18n="intro.proofLocal">图片不上传</li>
+            <li data-i18n="intro.proofLogin">无需账号</li>
+            <li data-i18n="intro.proofOpen">开源可检查</li>
+          </ul>
+        </div>
       </section>
 
       <section class="workspace">
@@ -188,6 +231,7 @@
           <div id="paletteGrid" class="palette-grid"></div>
 
           <button id="exportReportButton" class="button button-primary report-export" type="button" data-i18n="export.report">下载本地预检记录</button>
+          <a class="feedback-link" href="https://github.com/miffyli21/sightline-visual-preflight/issues/new?template=feedback.md" target="_blank" rel="noopener noreferrer" data-i18n="feedback.report">哪里不好懂？告诉我 →</a>
         </aside>
       </section>
 
@@ -195,7 +239,10 @@
         <p data-i18n="footer.copy">
           Sightline v0.1.0-alpha.2 · 本地浏览器工具。模拟结果用于设计审查，不替代真实用户测试、屏幕阅读器测试或正式合规审计。
         </p>
-        <button id="aboutButton" class="text-button" type="button" data-i18n="footer.howTo">怎么使用？</button>
+        <div class="footer-links">
+          <button id="aboutButton" class="text-button" type="button" data-i18n="footer.howTo">怎么使用？</button>
+          <a class="text-link" href="https://github.com/miffyli21/sightline-visual-preflight" target="_blank" rel="noopener noreferrer" data-i18n="footer.source">GitHub 源码 / Star</a>
+        </div>
       </footer>
     </main>
 
@@ -212,6 +259,6 @@
       <p class="dialog-note" data-i18n="about.note">所有处理均在当前浏览器完成，不会上传图片。</p>
     </dialog>
 
-    <script src="./app.js?v=0.1.0-alpha.2"></script>
+    <script src="./app.js?v=20260820"></script>
   </body>
 </html>

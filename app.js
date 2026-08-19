@@ -13,6 +13,8 @@
     fileInput: $("#fileInput"),
     uploadButton: $("#uploadButton"),
     demoButton: $("#demoButton"),
+    heroUploadButton: $("#heroUploadButton"),
+    heroDemoButton: $("#heroDemoButton"),
     dropZone: $("#dropZone"),
     targetPreset: $("#targetPreset"),
     markAreaButton: $("#markAreaButton"),
@@ -58,8 +60,8 @@
   var translations = {
     zh: {
       meta: {
-        title: "Sightline · 视觉成品预检",
-        description: "Sightline：在发布前检查海报、社媒图和 UI 截图是否看得清。"
+        title: "Sightline · 发布前检查设计是否看得清",
+        description: "免费、本地运行的设计可读性检查工具：导入海报、社媒图或 UI 截图，快速检查小屏、灰阶、色觉模拟与文字对比度。无需登录，图片不上传。"
       },
       language: {
         chinese: "中文",
@@ -67,14 +69,19 @@
       },
       topbar: {
         localOnly: "图片不会离开你的设备",
-        loadDemo: "载入示例",
+        loadDemo: "重新开始示例",
         importImage: "导入成品图"
       },
       intro: {
-        kicker: "发布前的最后一眼",
-        headBefore: "别只看它“好不好看”，也看看它",
-        headHighlight: "能不能被看清。",
-        copy: "面向海报、社媒图和 UI 截图的本地视觉预检。这里给的是风险提示，不是无障碍合规认证。"
+        kicker: "海报 / 社媒图 / UI 截图",
+        headBefore: "导入设计成品，快速检查",
+        headHighlight: "小字、对比度和色觉风险。",
+        copy: "无需安装或登录。图片只在当前浏览器中处理；这里给的是发布前风险提示，不是无障碍合规认证。",
+        primaryCta: "立即检查我的设计",
+        demoCta: "先看风险示例",
+        proofLocal: "图片不上传",
+        proofLogin: "无需账号",
+        proofOpen: "开源可检查"
       },
       input: {
         heading: "成品与场景",
@@ -114,6 +121,7 @@
         switchLanguage: "切换到{language}",
         modeTabs: "视觉模拟模式",
         canvas: "成品图预览",
+        productProof: "产品特点",
         close: "关闭"
       },
       legend: {
@@ -181,6 +189,7 @@
         original: "正在查看原图。点击画面可取样 {sample}。",
         sampleA: "A 文字色",
         sampleB: "B 背景色",
+        demoReady: "示例已标出一个低对比区域。先点“小屏”或“灰阶”，看看问题会不会更明显。",
         demoLoaded: "已载入演示图。里面刻意放了几种常见的可读性风险。",
         areasCleared: "已清空关键区域。",
         analysisRefreshed: "已重新分析画面主色与潜在混淆色。",
@@ -204,9 +213,13 @@
         image: "导出当前视图 PNG",
         report: "下载本地预检记录"
       },
+      feedback: {
+        report: "哪里不好懂？告诉我 →"
+      },
       footer: {
         copy: "Sightline v0.1.0-alpha.2 · 本地浏览器工具。模拟结果用于设计审查，不替代真实用户测试、屏幕阅读器测试或正式合规审计。",
-        howTo: "怎么使用？"
+        howTo: "怎么使用？",
+        source: "GitHub 源码 / Star"
       },
       about: {
         heading: "三分钟，给一张成品图多看几眼。",
@@ -219,8 +232,8 @@
     },
     en: {
       meta: {
-        title: "Sightline · Local visual preflight",
-        description: "Check whether the key information in a poster, social graphic, or UI screenshot is still legible before it ships."
+        title: "Sightline · Check design readability before you publish",
+        description: "A free, local-first tool for checking small-screen legibility, grayscale, color-vision simulations, and text contrast in posters, social graphics, and UI screenshots."
       },
       language: {
         chinese: "Chinese",
@@ -228,14 +241,19 @@
       },
       topbar: {
         localOnly: "Your image stays on this device",
-        loadDemo: "Load demo",
+        loadDemo: "Restart demo",
         importImage: "Import image"
       },
       intro: {
-        kicker: "One last look before publishing",
-        headBefore: "A visual should not only look good. It should also ",
-        headHighlight: "stay legible.",
-        copy: "A local visual preflight for posters, social graphics, and UI screenshots. It highlights risks; it is not an accessibility conformance certification."
+        kicker: "POSTERS / SOCIAL GRAPHICS / UI SCREENSHOTS",
+        headBefore: "Import an exported design. Quickly spot ",
+        headHighlight: "small-text, contrast, and color-vision risks.",
+        copy: "No install or account. Your image is processed only in this browser; Sightline highlights pre-publish risks, not accessibility conformance.",
+        primaryCta: "Check my design",
+        demoCta: "Show me a risk demo",
+        proofLocal: "No uploads",
+        proofLogin: "No account",
+        proofOpen: "Open source"
       },
       input: {
         heading: "Image & scenario",
@@ -275,6 +293,7 @@
         switchLanguage: "Switch to {language}",
         modeTabs: "Visual simulation modes",
         canvas: "Visual preview",
+        productProof: "Product principles",
         close: "Close"
       },
       legend: {
@@ -342,6 +361,7 @@
         original: "Viewing the original. Click the image to sample {sample}.",
         sampleA: "A text color",
         sampleB: "B background color",
+        demoReady: "One low-contrast area is already marked. Try Small screen or Grayscale to make the problem easier to spot.",
         demoLoaded: "Demo loaded. It intentionally includes several common readability risks.",
         areasCleared: "Key areas cleared.",
         analysisRefreshed: "Dominant colors and possible color conflicts re-analysed.",
@@ -365,9 +385,13 @@
         image: "Export current view PNG",
         report: "Download local record"
       },
+      feedback: {
+        report: "What was confusing? Tell me →"
+      },
       footer: {
         copy: "Sightline v0.1.0-alpha.2 · A local browser tool. Simulations support design review; they do not replace real-user testing, screen-reader testing, or a formal conformance audit.",
-        howTo: "How does it work?"
+        howTo: "How does it work?",
+        source: "GitHub source / Star"
       },
       about: {
         heading: "Give an exported visual three more minutes of attention.",
@@ -747,8 +771,10 @@
     context.fillText(isEnglish ? "Replace “later” with one breath." : "把“待会儿再说”换成一个呼吸。", 121, 647);
 
     resetInteractionState();
+    seedDemoReview();
     analyzeImage();
     render();
+    setStageHint(t("stage.demoReady"));
   }
 
   function resetInteractionState() {
@@ -760,6 +786,25 @@
     state.samples.a = null;
     state.samples.b = null;
     updateMarkingUi();
+    updateSampleControls();
+  }
+
+  function seedDemoReview() {
+    state.keyAreas = [
+      { x: 0.095, y: 0.43, width: 0.49, height: 0.07 },
+      { x: 0.1, y: 0.55, width: 0.235, height: 0.09 }
+    ];
+    state.samples.a = {
+      u: 0.13,
+      v: 0.475,
+      rgb: { r: 141, g: 154, b: 162 }
+    };
+    state.samples.b = {
+      u: 0.55,
+      v: 0.475,
+      rgb: { r: 255, g: 253, b: 247 }
+    };
+    state.activeSample = "a";
     updateSampleControls();
   }
 
@@ -1379,6 +1424,12 @@
       dom.fileInput.click();
     });
 
+    if (dom.heroUploadButton) {
+      dom.heroUploadButton.addEventListener("click", function () {
+        dom.fileInput.click();
+      });
+    }
+
     dom.dropZone.addEventListener("click", function () {
       dom.fileInput.click();
     });
@@ -1415,6 +1466,18 @@
       loadDemo();
       setStageHint(t("stage.demoLoaded"));
     });
+
+    if (dom.heroDemoButton) {
+      dom.heroDemoButton.addEventListener("click", function () {
+        loadDemo();
+        setMode("gray");
+        setStageHint(t("stage.demoLoaded"));
+        var demoTarget = document.querySelector(".canvas-panel");
+        if (demoTarget) {
+          demoTarget.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
+      });
+    }
 
     dom.targetPreset.addEventListener("change", function (event) {
       state.target = event.target.value;

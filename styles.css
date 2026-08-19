@@ -271,12 +271,12 @@ select:focus-visible {
   letter-spacing: -0.065em;
 }
 
-.intro-strip h2 span {
+.intro-strip h2 .intro-highlight {
   position: relative;
   z-index: 0;
 }
 
-.intro-strip h2 span::after {
+.intro-strip h2 .intro-highlight::after {
   position: absolute;
   z-index: -1;
   right: -4px;
@@ -288,12 +288,54 @@ select:focus-visible {
   transform: rotate(-1.6deg);
 }
 
-.intro-strip > p {
-  align-self: end;
+.intro-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 17px;
+}
+
+.intro-actions .button {
+  min-height: 41px;
+  padding-inline: 16px;
+}
+
+.intro-aside {
+  align-self: center;
+}
+
+.intro-aside > p {
   max-width: 430px;
+  margin: 0;
   color: #64636a;
   font-size: 0.83rem;
   line-height: 1.65;
+}
+
+.intro-proof {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 13px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.intro-proof li {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 8px;
+  border-radius: 999px;
+  color: #376965;
+  background: rgba(215, 241, 226, 0.58);
+  font-size: 0.7rem;
+  font-weight: 700;
+}
+
+.intro-proof li::before {
+  content: "✓";
+  color: var(--teal);
 }
 
 .workspace {
@@ -833,6 +875,21 @@ select:focus-visible {
   margin-top: auto;
 }
 
+.feedback-link {
+  align-self: center;
+  margin-top: 10px;
+  color: var(--violet);
+  font-size: 0.72rem;
+  font-weight: 720;
+  text-decoration: none;
+}
+
+.feedback-link:hover,
+.text-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .app-footer {
   display: flex;
   align-items: center;
@@ -848,9 +905,23 @@ select:focus-visible {
   line-height: 1.45;
 }
 
+.footer-links {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 13px;
+}
+
 .app-footer .text-button {
   flex: 0 0 auto;
   margin: 0;
+}
+
+.text-link {
+  color: var(--violet);
+  font-size: 0.71rem;
+  font-weight: 720;
+  text-decoration: none;
 }
 
 .about-dialog {
@@ -957,9 +1028,19 @@ select:focus-visible {
     padding: 18px;
   }
 
+  .intro-aside {
+    padding-top: 2px;
+  }
+
   .workspace {
     display: flex;
     flex-direction: column;
+  }
+
+  .app-footer {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 8px;
   }
 
   .control-panel,

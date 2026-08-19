@@ -1,17 +1,37 @@
-# Sightline · 视觉成品预检
+# Sightline：发布前检查设计是否看得清
 
-> 在发布前，确认海报、社媒图和 UI 截图里的关键信息仍然看得清。
+> 免费、本地运行的设计可读性检查工具。导入海报、社媒图或 UI 截图，快速检查小字、文字对比度、灰阶表现和色觉风险。
 
-Sightline 是一个完全本地运行的浏览器小工具。它不上传图片、不要求登录，也不试图替代正式无障碍审计；它的用途是让设计师、内容创作者和产品团队在交付前多看一眼真实导出的成品。
+[English README](./README.en.md)
 
-English: [README.en.md](./README.en.md)
+<p align="center">
+  <a href="https://miffyli21.github.io/sightline-visual-preflight/?lang=zh"><strong>立即在线试用 →</strong></a>
+  ·
+  <a href="https://miffyli21.github.io/sightline-visual-preflight/?lang=en">English demo</a>
+</p>
 
-## 在线试用
+![Sightline 中文界面：检查社媒图在小屏、灰阶和色觉模拟下的可读性](./docs/sightline-demo-zh.png)
 
-- 中文：[打开 Sightline](https://miffyli21.github.io/sightline-visual-preflight/?lang=zh)
-- English: [Try Sightline in English](https://miffyli21.github.io/sightline-visual-preflight/?lang=en)
+<p align="center"><strong>图片不上传 · 无需账号 · 无需安装</strong></p>
 
-界面右上角也可以随时切换中英文。图片只在你的当前浏览器中处理。
+## 它能帮你先发现什么
+
+- 海报缩小或进入手机信息流后，小字是否已经看不清；
+- 颜色变成灰阶或进入色觉模拟后，状态和重点是否仍能区分；
+- 文字压在渐变、阴影或照片上时，实际对比度是否偏低；
+- 标题、价格、按钮等必须看清的信息，是否值得交付前再调整一次。
+
+Sightline 不要求你有 Figma 源文件：拿最终导出的图片就能检查。它不替代正式无障碍审计，只负责把容易忽略的视觉风险更早摆到你面前。
+
+## 30 秒开始
+
+1. [打开在线工具](https://miffyli21.github.io/sightline-visual-preflight/?lang=zh)；
+2. 先看自带风险示例，或导入自己的 PNG、JPG、WebP、GIF / SVG；
+3. 点击“小屏”“灰阶”或不同色觉模拟，再对可疑文字和背景做 A / B 取色。
+
+所有图像处理都发生在当前浏览器中。你也可以下载仓库后双击“打开 Sightline.bat”，完全离线使用。
+
+试过之后如果有一步不好懂，可以直接[提交一条简短反馈](https://github.com/miffyli21/sightline-visual-preflight/issues/new?template=feedback.md)。不需要懂代码。
 
 ## 第一版能做什么
 
