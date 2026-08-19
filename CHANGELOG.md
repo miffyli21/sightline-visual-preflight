@@ -2,6 +2,14 @@
 
 All notable changes are documented here.
 
+## Unreleased — 2026-08-20
+
+- Reframed the landing page and bilingual README around concrete poster, social-graphic, and UI-screenshot readability problems;
+- Added prominent try-now and risk-demo actions plus real Chinese and English interface previews;
+- Seeded the built-in demo with marked key areas and a low-contrast sample so the report explains its value immediately;
+- Added direct feedback and GitHub links without changing the local-only image-processing model;
+- Added canonical, Open Graph, structured-data, robots, and sitemap metadata for clearer search discovery.
+
 ## v0.1.0-alpha.2 — 2026-08-12
 
 - Chinese and English interface, with a shareable `?lang=en` or `?lang=zh` language URL;

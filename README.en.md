@@ -1,10 +1,37 @@
-# Sightline · Local visual preflight
+# Sightline — check whether a design stays readable before publishing
 
-> Before publishing, check whether the key information in a poster, social graphic, or UI screenshot is still legible.
+> A free, local-first readability checker for posters, social graphics, and UI screenshots. Quickly inspect small text, contrast, grayscale, and color-vision risks from the actual exported image.
 
-[中文说明](./README.md) · [Try the English app](https://miffyli21.github.io/sightline-visual-preflight/?lang=en) · [Try the Chinese app](https://miffyli21.github.io/sightline-visual-preflight/?lang=zh)
+[中文说明](./README.md)
 
-Sightline is a browser tool that runs completely on your device. It does not upload images, require an account, or claim to replace an accessibility audit. Its job is simpler: give designers, creators, and product teams one more deliberate look at the actual exported visual before it ships.
+<p align="center">
+  <a href="https://miffyli21.github.io/sightline-visual-preflight/?lang=en"><strong>Try Sightline now →</strong></a>
+  ·
+  <a href="https://miffyli21.github.io/sightline-visual-preflight/?lang=zh">中文体验</a>
+</p>
+
+![Sightline English interface checking a social graphic in small-screen, grayscale, and color-vision views](./docs/sightline-demo-en.png)
+
+<p align="center"><strong>No uploads · No account · No install</strong></p>
+
+## What it helps you catch
+
+- Small copy that disappears when a poster becomes a mobile-feed thumbnail;
+- Status or emphasis that stops working in grayscale or color-vision simulations;
+- Text over photos, gradients, or shadows whose sampled contrast is too weak;
+- A title, price, button, or error message that deserves one more adjustment before delivery.
+
+Sightline works from the final exported image, so you do not need a Figma source file. It does not replace an accessibility audit; it makes easy-to-miss visual risks visible earlier.
+
+## Start in 30 seconds
+
+1. [Open the hosted app](https://miffyli21.github.io/sightline-visual-preflight/?lang=en);
+2. Explore the built-in risk demo or import your own PNG, JPG, WebP, GIF, or SVG;
+3. Switch to small-screen, grayscale, or a color-vision view, then sample suspicious text and background pixels.
+
+All image processing stays in the current browser. You can also download the repository and open `index.html` for fully local use.
+
+If one step feels unclear, [leave a short feedback issue](https://github.com/miffyli21/sightline-visual-preflight/issues/new?template=feedback.md). No coding knowledge is required.
 
 ## What the current alpha does
 
